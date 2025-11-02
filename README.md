@@ -165,13 +165,8 @@ bash ./Agent/train/mhqa_agent/rl/train_dapo_mhqa_agent_wiki.sh
 
 ## Evaluation
 ### Multi Hop QA (MHQA) Evaluation
-1. To evaluate MHQA datasets, you should first download the MHQA-Agent-3B-rl model and test datasets (to be uploaded...)
-2. Transform the test dataset to parquet format.
-```bash
-cd ./Agent/data/mhqa_agent
-bash ./prepare.sh
-```
-3. Then fill the corresponding dataset and model in scripts below and run
+1. To evaluate MHQA datasets, you should first download the MHQA-Agent-3B-rl model and test datasets
+2. Then fill the corresponding dataset and model in scripts below and run
   ```bash
   bash ./Agent/evaluation/mhqa_agent/eval_mhqa_agent.sh
   ```
