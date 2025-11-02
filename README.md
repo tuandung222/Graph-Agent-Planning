@@ -1,4 +1,9 @@
 # Parallel-Agent-Workflow-Planning
+<div align="center">
+  <a href='https://arxiv.org/abs/2510.25320'><img src='https://img.shields.io/badge/Paper AFM-arXiv-d63031?logo=arxiv&logoColor=white'></a>
+  <!-- <a href='https://huggingface.co/collections/PersonalAILab/afm-689200e11d0b21a67c015ba8'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Models-Huggingface-yellow'></a> -->
+  <a href='https://huggingface.co/datasets/Chtistina777/GAP-MHQA-SFT-7K'><img src='https://img.shields.io/badge/%F0%9F%A4%97%20Datasets-Huggingface-yellow'></a>
+</div>
 This is the repository for our paper "GAP: Graph-Based Agent Planning with Parallel Tool Use and Reinforcement Learning". We propose a new paradigm for LLM reasoning that enables parallel workflow planning and end-to-end RL trianing within a single model. The fine-tuning dataset and model checkpoint will be released soon.
 <div align="center">
   <img src="./assets/gap1.png" width="90%" height="auto" />
