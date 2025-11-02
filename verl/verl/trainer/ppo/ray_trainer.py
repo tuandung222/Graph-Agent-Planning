@@ -1755,55 +1755,26 @@ class RayPPOTrainer:
                                 kept_traj_idxs.append(idx)
 
                         new_batch = new_batch[kept_traj_idxs]
-                        # 在报错的代码行前添加调试信息
-                        print("=== DataProto Concat Debug ===")
-                        print(f"batch is None: {batch is None}")
-
-                        # 调试 new_batch
-                        print(f"new_batch length: {len(new_batch)}")
-                        if new_batch.batch is not None:
-                            print(f"new_batch.batch.batch_size: {new_batch.batch.batch_size}")
-                            print(f"new_batch.batch keys: {list(new_batch.batch.keys())}")
-                        else:
-                            print("new_batch.batch: None")
-
-                        if new_batch.non_tensor_batch:
-                            print(f"new_batch.non_tensor_batch keys: {list(new_batch.non_tensor_batch.keys())}")
-                        else:
-                            print("new_batch.non_tensor_batch: empty")
 
                         # 调试 batch (如果不为 None)
-                        if batch is not None:
-                            print(f"batch length: {len(batch)}")
-                            if batch.batch is not None:
-                                print(f"batch.batch.batch_size: {batch.batch.batch_size}")
-                                print(f"batch.batch keys: {list(batch.batch.keys())}")
-                            else:
-                                print("batch.batch: None")
-                            
-                            if batch.non_tensor_batch:
-                                print(f"batch.non_tensor_batch keys: {list(batch.non_tensor_batch.keys())}")
-                            else:
-                                print("batch.non_tensor_batch: empty")
-                            
-                            # 检查维度不匹配
-                            print("--- Dimension Mismatch Check ---")
+                        if batch is not None:                    
+                            # print("--- Dimension Mismatch Check ---")
                             if batch.batch is not None and new_batch.batch is not None:
                                 for key in set(batch.batch.keys()) | set(new_batch.batch.keys()):
                                     if key in batch.batch and key in new_batch.batch:
                                         old_shape = batch.batch[key].shape
                                         new_shape = new_batch.batch[key].shape
-                                        if len(old_shape) != len(new_shape):
-                                            print(f"⚠️ TENSOR MISMATCH '{key}': {old_shape} vs {new_shape}")                     
+                                        # if len(old_shape) != len(new_shape):
+                                        #     print(f"⚠️ TENSOR MISMATCH '{key}': {old_shape} vs {new_shape}")                     
                             
                             for key in set(batch.non_tensor_batch.keys()) | set(new_batch.non_tensor_batch.keys()):
                                 if key in batch.non_tensor_batch and key in new_batch.non_tensor_batch:
                                     old_shape = batch.non_tensor_batch[key].shape
                                     new_shape = new_batch.non_tensor_batch[key].shape
                                     if len(old_shape) != len(new_shape):
-                                        print(f"⚠️ NON_TENSOR MISMATCH '{key}': {old_shape} vs {new_shape}")
-                                        print(f"new_batch answer sample: {new_batch.non_tensor_batch['answer'][:3]}")
-                                        print(f"batch answer sample: {batch.non_tensor_batch['answer'][:3]}")
+                                        # print(f"⚠️ NON_TENSOR MISMATCH '{key}': {old_shape} vs {new_shape}")
+                                        # print(f"new_batch answer sample: {new_batch.non_tensor_batch['answer'][:3]}")
+                                        # print(f"batch answer sample: {batch.non_tensor_batch['answer'][:3]}")
                                         new_batch.non_tensor_batch[key] = [item[0] for item in new_batch.non_tensor_batch[key]]
                                         batch.non_tensor_batch[key] = [item[0] for item in batch.non_tensor_batch[key]]
                                         # new_batch = self.normalize_answer_format(new_batch) 
