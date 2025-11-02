@@ -22,28 +22,26 @@ pip install -e '.[torch,metrics]'
 ```
 
 #### 2. Prepare SFT Dataset
-Download SFT Dataset for Web/MHQA/Code Agent:
-```py 
-python ./Agent/data/web_agent/download.py 
+Download SFT Dataset for MHQA Agent:
+```py  
 python ./Agent/data/mhqa_agent/download.py 
-python ./Agent/data/code_agent/download.py 
 ```
 
 Add the downloaded dataset filepath to `LLaMA-Factory/data/dataset_info.json`, for example:
 ```json
-"code_agent_sft": {
-  "file_name": "path/to/downloaded/WebAgent-SFT-Dataset/WebAgentSFTDataset.json"
+"mhqa_agent_sft": {
+  "file_name": "path/to/downloaded/MHQA-SFT-Dataset/MHQA-SFTDataset.json"
 }
 ```
 
 #### 3. Start training with default parameters
 The training scripts are list in `./train`. 
-Example of sft for code agent:
+Example of sft for MHQA agent:
 ```bash
-bash ./Agent/train/code_agent/sft/sft_qwen2.5_3b.sh
+bash ./Agent/train/mhqa_agent/sft/sft_qwen2.5_3b.sh
 ```
 
-Note `DATA_DATA` in the training bash script should be the key in `LLaMA-Factory/data/dataset_info.json`, like `web_agent_sft`, `mhqa_agent_sft`, `code_agent_sft`.
+Note `DATA_DATA` in the training bash script should be the key in `LLaMA-Factory/data/dataset_info.json`, like `web_agent_sft`, `mhqa_agent_sft`.
 
 Logs output to output_dir/training.log. We use [SwanLab](https://swanlab.cn/) for visualization (requires setup):
 ```bash
@@ -118,17 +116,15 @@ To use this feature during training, you need to:
    ```
 
 
-#### 4. Configuration
+#### 3. Configuration
 1. Edit the `environment.sh` file and fill in your API keys and other required credentials
 2. Apply the environment settings:
 ```bash
 source environment.sh
 ```
 
-#### 5. Dataset Processing
+#### 4. Dataset Processing
 The `./Agent/data/README.md` contains scripts and instructions for processing search agent model related data.
-
-For code agent model, the validation datasets are already provided in the `./Agent/data/code_agent/code_math_benchmarks` folder, with corresponding processing instructions available in `./Agent/data/code_agent/code_math_benchmarks/README.md`.
 
 The final web_agent and mhqa_agent dataset format is shown below and stored in .parquet: 
 ```python
@@ -150,22 +146,20 @@ The final web_agent and mhqa_agent dataset format is shown below and stored in .
 ```
 
 
-#### 6. Training
+#### 5. Training
 To start a training run:
 
 1. All Agentic-RL script examples are listed:
     -  Web Agent: `./Agent/train/web_agent/rl/train_dapo_web_agent.sh`
-    -  Code Agent: `./Agent/train/code_agent/rl/train_dapo_code_agent.sh`
-    -  MHQA Agent: `./Agent/train/mhqa_agent/rl/train_ppo_mhqa_agent.sh`
+    -  MHQA Agent: `./Agent/train/mhqa_agent/rl/train_dapo_mhqa_agent.sh`
 2. Edit the corresponding script to specify your downloaded dataset and model
 3. Make sure you have already fill in the `environment.sh` and source
 4. All tool configs are listed and have been specified in training scripts: 
     - web_search and crawl_page: `verl/verl/tools/config/search_tool_config/training_servers_config.yaml`
-    - code_executor: `verl/verl/tools/config/code_tool_config/code_executor.yaml`
     - wiki_search: `verl/verl/tools/config/search_tool_config/wiki_rag_config.yaml`
 5. Execute the training script like:
 ```bash
-bash ./Agent/train/web_agent/rl/train_dapo_web_agent.sh
+bash ./Agent/train/mhqa_agent/rl/train_dapo_mhqa_agent_wiki.sh
 ```
 
 
@@ -179,22 +173,8 @@ bash ./prepare.sh
 ```
 3. Then fill the corresponding dataset and model in scripts below and run
   ```bash
-  bash evaluation/inference_mhqa.sh
+  bash ./Agent/evaluation/mhqa_agent/eval_mhqa_agent.sh
   ```
-
-
-### Web Agent Evaluation (later work)
-1. To evaluate web agent, you should first download the model checkpoint (or your own) and test dataset.
-2. Set environment variable `source environment.sh`.
-3. Set `model_path` in the `run_qwen.sh` script, and serve the model with the following command `./Agent/evaluation/web_agent/run_qwen.sh`. After several minutes, the script will output like `URL Endpoint: http://10.77.225.92:10000/v1`.
-4. Choose from available test sets in `./Agent/data/web_agent/test_benchmarks`: gaia, hle, webwalker, browsercomp.
-5. Finally, set `URL` in `inference_web_agent.py` according to step3, and execute the python script to start webagent inference and evaluation.
-
-```bash
-python ./Agent/evaluation/web_agent/inference_web_agent.py \
-    --infile  ./Agent/data/web_agent/test_benchmarks/gaia_dev_103.json \
-    --outfile ./Agent/evaluation/web_agent/results/webagent_out.jsonl
-```
 
 
 # Acknowledgement

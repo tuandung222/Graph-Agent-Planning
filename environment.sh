@@ -33,11 +33,6 @@ export WEB_SEARCH_SERPER_API_KEY=""
 export SUMMARY_OPENAI_API_BASE_URL="https://api.tensoropera.ai/v1"
 export SUMMARY_OPENAI_API_KEY=""
 export SUMMARY_MODEL="gpt-4o-mini"
-# =====================================================================================================================
-#                                      Code testcases
-# =====================================================================================================================
-# for evaluate code val datasets
-export LIVECODEBENCH_DATA_PATH="$(pwd)/data/code_agent/livecodebench_testcases"
 
 export UNI_API_URLS="https://api.tensoropera.ai/v1" # or other qwen3 api provider
 export UNI_API_KEY=""
