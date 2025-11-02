@@ -98,24 +98,6 @@ We have developed two server-side components to support web interactions:
 
 For detailed deployment instructions, please refer to `Agent/tool_servers/tool_server_readme.md`.
 
-
-##### 2.2 Code Server(s)
-Our Python executor leverages the powerful local isolation sandbox capabilities provided by [nsjail](https://github.com/google/nsjail). We greatly appreciate the nsjail project for enabling secure code execution.
-
-To use this feature during training, you need to:
-
-1. Clone and build nsjail
-    ```bash
-    git clone https://github.com/google/nsjail.git
-    cd nsjail
-    make
-    ```
-2. Add the absolute path to the nsjail_path in code tool configuration file `verl/verl/tools/config/code_tool_config/code_executor.yaml`:
-   ```yaml
-   nsjail_path: /abs_path/to/your/nsjail/nsjail
-   ```
-
-
 #### 3. Configuration
 1. Edit the `environment.sh` file and fill in your API keys and other required credentials
 2. Apply the environment settings:
@@ -126,7 +108,7 @@ source environment.sh
 #### 4. Dataset Processing
 The `./Agent/data/README.md` contains scripts and instructions for processing search agent model related data.
 
-The final web_agent and mhqa_agent dataset format is shown below and stored in .parquet: 
+The final mhqa_agent dataset format is shown below and stored in .parquet: 
 ```python
 {
     "data_source": data_source,
@@ -150,7 +132,6 @@ The final web_agent and mhqa_agent dataset format is shown below and stored in .
 To start a training run:
 
 1. All Agentic-RL script examples are listed:
-    -  Web Agent: `./Agent/train/web_agent/rl/train_dapo_web_agent.sh`
     -  MHQA Agent: `./Agent/train/mhqa_agent/rl/train_dapo_mhqa_agent.sh`
 2. Edit the corresponding script to specify your downloaded dataset and model
 3. Make sure you have already fill in the `environment.sh` and source
