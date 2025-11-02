@@ -1,6 +1,6 @@
 set -e
 
-MODEL_PATH="/home/jiaqi/Agent_Foundation_Models/AFM/models/Qwen2.5-3B-Instruct"
+MODEL_PATH="home/jiaqi/Graph-Agent-Planning/Agent/models/Qwen2.5-3B-Instruct"
 
 export NNODES=1
 NODE_RANK=${RANK:-0}
@@ -9,14 +9,14 @@ CUDA_VISIBLE_DEVICES=0,1
 
 STAGE=sft
 finetuning_type=full
-OUTPUT_DIR_BASE="/home/jiaqi/Agent_Foundation_Models/experiments"
+OUTPUT_DIR_BASE="home/jiaqi/Graph-Agent-Planning/experiments"
 EPOCHS=4.0
 PRECISION="bf16"
 CUTOFF_LEN=5120
 ignore_observation=true
 ignore_observation_token=observation
 
-# prepare the dataset file name on your dataset_info.json about the "./AFM-MHQA-Agent-SFT-Dataset".
+# prepare the dataset file name on your dataset_info.json about the "./MHQA-Agent-SFT-Dataset".
 DATA_DATA="mhqa_agent_sft"
 TEMPALTE=qwen
 

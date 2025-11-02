@@ -240,7 +240,7 @@ proxy_server: SerperProxyServer
 async def lifespan(app: FastAPI):
     logger.info("Serper Cache Start")
     # --- Application Initialization and Shutdown ---
-    CACHE_FILE = "/home/jiaqi/Agent_Foundation_Models/AFM/tool_servers/cache/serper_api_cache.pkl"  # Switched to .pkl
+    CACHE_FILE = "home/jiaqi/Graph-Agent-Planning/Agent/tool_servers/cache/serper_api_cache.pkl"  # Switched to .pkl
     cache_backend = InMemoryCache(file_path=CACHE_FILE)
     app.state.proxy_server = SerperProxyServer(cache_backend=cache_backend)
     yield

@@ -32,14 +32,14 @@ offload=True
 # export WANDB_MODE="offline"
 CURRENT_DIR=$(pwd)
 export NNODES=1 # "your GPU group number"
-export PROJECT_NAME="agent_foundation_models"
+export PROJECT_NAME="Graph-Agent-Planning"
 SAVE_MODEL_FOLDER="${CURRENT_DIR}/experiments"  # your save model folder
-export EXPERIMENT_NAME="PPO-QWEN3B-MHQA-Agent-test-eval"
-export BASE_MODEL="/home/jiaqi/Agent_Foundation_Models/AFM/models/Qwen2.5-3B-Instruct"   # your train model path
+export EXPERIMENT_NAME="DAPO-QWEN3B-MHQA-Agent-test-eval"
+export BASE_MODEL="/home/jiaqi/Graph-Agent-Planning/Agent/models/Qwen2.5-3B-Instruct"   # your train model path
 export VLLM_ATTENTION_BACKEND=XFORMERS
-TRAIN_DATASETS="${CURRENT_DIR}/AFM/data/mhqa_agent/AFM-MHQA-RL-Dataset/original_16w_column_filter_index.parquet"   # your train dataset
-VAL_DATASETS="/home/jiaqi/Agent_Foundation_Models/AFM/data/mhqa_agent/test_benchmarks/nq_full_one_shot_first_500.parquet"
-log_path="/home/jiaqi/Agent_Foundation_Models/experiments/test_parallel_500_3B"
+TRAIN_DATASETS="${CURRENT_DIR}/Agent/data/mhqa_agent/GAP-RL-Dataset/original_16w_filter_index.parquet"   # your train dataset
+VAL_DATASETS="/home/jiaqi/Graph-Agent-Planning/Agent/data/mhqa_agent/test_benchmarks/nq_full.parquet"
+log_path="/home/jiaqi/Graph-Agent-Planning/experiments/test_parallel"
 # =====================================================================================================================
 #                                      Tool
 # =====================================================================================================================
